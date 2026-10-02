@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Completa con Bubu · Matemática 9no Grado</title>
+<style>
+  :root{
+    --primary:#1e3a8a; --primary-light:#3b82f6; --accent:#f59e0b;
+    --success:#10b981; --danger:#ef4444; --purple:#8b5cf6;
+    --whatsapp:#25d366; --whatsapp-dark:#128c7e;
+    --bubu-pink:#f9a8c9; --bubu-pink-light:#fde5f0; --bubu-pink-dark:#e879a8;
+    --bubu-nose:#ec4899;
+    --text:#1e293b; --text-light:#64748b; --bg:#f1f5f9;
+    --card:#fff; --border:#e2e8f0;
+    --shadow-sm:0 1px 3px rgba(0,0,0,.06);
+    --shadow-md:0 4px 12px rgba(0,0,0,.08);
+    --radius:14px;
+    --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+    --font-serif:'Cambria','Georgia','Times New Roman',serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;padding-bottom:120px}
+
+  header.app-header{background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 60%,#60a5fa 100%);color:#fff;padding:36px 26px 28px;position:relative;overflow:hidden}
+  header.app-header::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 15% 20%,rgba(255,255,255,.10) 0,transparent 40%),radial-gradient(circle at 85% 80%,rgba(255,255,255,.08) 0,transparent 40%);pointer-events:none}
+  .header-inner{max-width:1150px;margin:0 auto;position:relative;z-index:1}
+  .header-inner h1{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+  .header-inner p{font-size:14px;opacity:.92}
+
+  nav.main-nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:2px solid var(--border);box-shadow:0 2px 10px rgba(0,0,0,.06)}
+  .nav-inner{max-width:1150px;margin:0 auto;padding:0 20px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .nav-inner::-webkit-scrollbar{display:none}
+  .nav-tab{flex-shrink:0;padding:16px 20px;border:none;background:transparent;font-family:inherit;font-size:14px;font-weight:700;color:var(--text-light);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;display:inline-flex;align-items:center;gap:8px;transition:all .2s;white-space:nowrap}
+  .nav-tab:hover{color:var(--primary);background:#f8fafc}
+  .nav-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+  .nav-tab .num-badge{background:var(--primary);color:#fff;font-size:10.5px;padding:2px 7px;border-radius:8px;font-weight:800}
+  .nav-tab:not(.active) .num-badge{background:#cbd5e1;color:#475569}
+
+  .page-section{display:none;animation:fadeIn .35s ease}
+  .page-section.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  .container{max-width:1150px;margin:0 auto;padding:24px 20px}
+  .banner{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow-md);margin-bottom:24px;overflow:hidden;border-top:5px solid var(--primary-light)}
+  .banner-header{display:flex;align-items:center;gap:14px;padding:18px 24px;background:linear-gradient(135deg,#f8fafc 0%,#eff6ff 100%);border-bottom:1px solid var(--border)}
+  .banner-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0;box-shadow:var(--shadow-sm)}
+  .banner-header h2{font-size:19px;font-weight:800;color:var(--text);line-height:1.2}
+  .banner-header p{font-size:13px;color:var(--text-light);margin-top:2px}
+  .banner-body{padding:24px}
+
+  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light)}
+  .field input,.field select{padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14.5px;color:var(--text);background:#fff;transition:border-color .2s,box-shadow .2s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 4px rgba(59,130,246,.15)}
+  .save-status{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px 16px;background:#d1fae5;color:#065f46;border-radius:10px;font-size:13.5px;font-weight:600;opacity:0;transform:translateY(-6px);transition:all .3s}
+  .save-status.show{opacity:1;transform:translateY(0)}
+
+  .sections-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:22px}
+  .section-btn{background:#fff;border:2px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;font-family:inherit;text-align:left;transition:all .2s;display:flex;align-items:flex-start;gap:10px}
+  .section-btn:hover{border-color:var(--primary-light);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+  .section-btn.active{border-color:var(--primary);background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%)}
+  .section-btn .sec-icon{width:34px;height:34px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;background:#f1f5f9}
+  .section-btn.active .sec-icon{background:#fff}
+  .section-btn .sec-info{flex:1;min-width:0}
+  .section-btn .sec-num{font-size:10px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+  .section-btn .sec-title{font-size:13px;font-weight:800;color:var(--text);line-height:1.3}
+  .section-btn.active .sec-title{color:var(--primary)}
+
+  .content-section{display:none;animation:fadeIn .3s}
+  .content-section.active{display:block}
+
+  .section-header-block{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border-radius:12px;padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;gap:16px}
+  .section-header-block .shb-icon{width:52px;height:52px;border-radius:14px;flex-shrink:0;background:rgba(255,255,255,.20);display:flex;align-items:center;justify-content:center;font-size:26px}
+  .section-header-block .shb-text h3{font-size:19px;font-weight:800;margin-bottom:3px}
+  .section-header-block .shb-text p{font-size:13px;opacity:.92}
+
+  .sub-block{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:14px;border-left:4px solid var(--primary-light)}
+  .sub-block h4{font-size:13.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--primary);font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .sub-block h4 .badge-num{background:var(--primary);color:#fff;font-size:10px;padding:2px 8px;border-radius:5px;font-weight:800}
+  .sub-block p,.sub-block li{font-size:14px;line-height:1.75;color:#334155;margin-bottom:8px}
+  .sub-block ul,.sub-block ol{padding-left:22px;margin-bottom:8px}
+  .sub-block li{margin-bottom:5px}
+  .sub-block strong{color:var(--primary);font-weight:700}
+
+  table.formula-table{width:100%;border-collapse:collapse;margin:12px 0;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm);font-size:13.5px}
+  table.formula-table thead{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff}
+  table.formula-table th{padding:10px;text-align:center;font-weight:700;font-size:12.5px;text-transform:uppercase}
+  table.formula-table td{padding:10px 12px;border-bottom:1px solid var(--border);background:#fff;text-align:center;font-family:var(--font-serif)}
+  table.formula-table td:first-child{text-align:left;font-family:var(--font-sans);font-weight:600}
+  table.formula-table tr:nth-child(even) td{background:#f8fafc}
+  table.formula-table tr:last-child td{border-bottom:none}
+
+  .formula-box{display:inline-block;font-family:var(--font-serif);background:#fffbeb;color:#92400e;padding:4px 12px;border-radius:6px;font-weight:700;font-size:15px;border:1.5px solid #fde68a;margin:4px 0}
+
+  .example-box{background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border:1px solid #a7f3d0;border-radius:10px;padding:14px 18px;margin:12px 0}
+  .example-box h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:#047857;font-weight:800;margin-bottom:10px}
+  .example-box p{font-family:var(--font-serif);font-size:14px;color:#065f46;line-height:1.75;margin-bottom:6px}
+  .example-box strong{font-family:var(--font-sans);font-weight:800;color:#047857}
+  .example-box .step{margin-left:14px;padding-left:12px;border-left:3px solid #10b981}
+
+  .warning-box{background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);border:1px solid var(--accent);border-radius:10px;padding:14px 18px;margin:12px 0;border-left:4px solid #b45309}
+  .warning-box h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:#92400e;font-weight:800;margin-bottom:8px}
+  .warning-box p,.warning-box li{font-size:13.5px;color:#78350f;line-height:1.75;margin-bottom:5px}
+
+  .tip-box{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:1px solid #93c5fd;border-radius:10px;padding:14px 18px;margin:12px 0;border-left:4px solid var(--primary)}
+  .tip-box h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--primary);font-weight:800;margin-bottom:8px}
+  .tip-box p,.tip-box li{font-size:13.5px;color:#1e40af;line-height:1.75;margin-bottom:5px}
+
+  .definition-box{background:linear-gradient(135deg,#faf5ff 0%,#f3e8ff 100%);border:1px solid #d8b4fe;border-radius:10px;padding:14px 18px;margin:12px 0;border-left:4px solid var(--purple)}
+  .definition-box h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.7px;color:#6d28d9;font-weight:800;margin-bottom:8px}
+  .definition-box p{font-size:13.5px;color:#4c1d95;line-height:1.75;margin-bottom:5px}
+  .definition-box strong{color:#6d28d9;font-weight:800}
+
+  .progress-card{background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);color:#fff;border-radius:14px;padding:20px 24px;margin-bottom:22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+  .progress-info h3{font-size:15px;font-weight:800;margin-bottom:4px}
+  .progress-info p{font-size:13px;opacity:.9}
+  .progress-bar{flex:1;min-width:200px;height:10px;background:rgba(255,255,255,.25);border-radius:999px;overflow:hidden}
+  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#fbbf24 0%,#f59e0b 100%);border-radius:999px;transition:width .4s}
+  .progress-count{font-size:14px;font-weight:800;white-space:nowrap}
+
+  .block-section{margin-bottom:26px;padding-bottom:22px;border-bottom:1px dashed var(--border)}
+  .block-section:last-child{border-bottom:none}
+  .block-title{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;padding:6px 14px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;border-radius:999px;font-size:13.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+
+  .exercise{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;transition:all .25s;position:relative;scroll-margin-top:90px}
+  .exercise:hover{box-shadow:var(--shadow-sm);border-color:#cbd5e1}
+  .exercise.correct{border-color:var(--success);background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%)}
+  .exercise.incorrect{border-color:var(--danger);background:linear-gradient(135deg,#fef2f2 0%,#fff1f2 100%)}
+  .exercise.current{box-shadow:0 0 0 3px rgba(59,130,246,.20);border-color:var(--primary-light)}
+  .exercise-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+  .ex-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:800}
+  .exercise.correct .ex-num{background:linear-gradient(135deg,#059669 0%,#10b981 100%)}
+  .exercise.incorrect .ex-num{background:linear-gradient(135deg,#dc2626 0%,#ef4444 100%)}
+  .ex-question{flex:1;font-family:var(--font-serif);font-size:15.5px;color:#334155;line-height:1.6}
+  .ex-meta{flex-shrink:0;display:flex;gap:6px;flex-direction:column;align-items:flex-end}
+  .ex-level{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:6px}
+  .ex-level.basico{background:#d1fae5;color:#065f46}
+  .ex-level.intermedio{background:#fef3c7;color:#92400e}
+  .ex-level.avanzado{background:#fee2e2;color:#991b1b}
+  .ex-help{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#fef3c7;color:#b45309;border:none;cursor:pointer;font-weight:800;font-size:15px;font-family:inherit;display:flex;align-items:center;justify-content:center;transition:all .2s}
+  .ex-help:hover{background:#fde68a;transform:scale(1.1)}
+
+  .options{display:flex;flex-direction:column;gap:8px;margin-top:8px;margin-left:44px}
+  .option{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;background:#fff;cursor:pointer;transition:all .18s;font-size:14.5px}
+  .option:hover{border-color:var(--primary-light);background:#eff6ff}
+  .option input[type="radio"]{accent-color:var(--primary);width:17px;height:17px;cursor:pointer}
+  .option.selected{border-color:var(--primary);background:#eff6ff;font-weight:600}
+  .option.correct-answer{border-color:var(--success);background:#d1fae5;font-weight:600}
+  .option.incorrect-answer{border-color:var(--danger);background:#fee2e2}
+
+  .numeric-input{margin-left:44px;margin-top:8px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .numeric-input input[type="text"]{padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-family:var(--font-serif);font-size:15px;width:180px;transition:border-color .2s}
+  .numeric-input input[type="text"]:focus{outline:none;border-color:var(--primary-light);box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+  .unit{font-family:var(--font-serif);font-size:14px;color:var(--text-light);font-style:italic}
+
+  .feedback{margin-top:12px;margin-left:44px;padding:10px 14px;border-radius:8px;font-size:13.5px;line-height:1.6;display:none}
+  .feedback.show{display:block}
+  .feedback.ok{background:#d1fae5;color:#065f46;border-left:3px solid var(--success)}
+  .feedback.no{background:#fee2e2;color:#991b1b;border-left:3px solid var(--danger)}
+
+  .practice-problem{background:#fff;border:2px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:18px;border-left:5px solid var(--purple)}
+  .pp-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .pp-badge{background:linear-gradient(135deg,var(--purple) 0%,#a855f7 100%);color:#fff;font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:999px;letter-spacing:.8px;text-transform:uppercase}
+  .pp-title{font-size:15px;font-weight:800;color:var(--text)}
+  .pp-statement{background:#f8fafc;padding:14px 18px;border-radius:10px;font-family:var(--font-serif);font-size:14.5px;color:#334155;line-height:1.7;margin-bottom:12px;border-left:3px solid var(--accent)}
+  .pp-solution-toggle{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border:1.5px solid var(--primary-light);color:var(--primary);padding:10px 18px;border-radius:9px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+  .pp-solution-toggle:hover{background:var(--primary-light);color:#fff;transform:translateY(-2px)}
+  .pp-solution{display:none;margin-top:14px;padding:16px 18px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border-left:4px solid var(--success);font-family:var(--font-serif);font-size:14px;color:#065f46;line-height:1.8}
+  .pp-solution.show{display:block}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border:none;border-radius:11px;font-family:inherit;font-size:14.5px;font-weight:800;cursor:pointer;transition:all .22s;white-space:nowrap}
+  .btn-primary{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%);color:#fff;box-shadow:0 4px 14px rgba(59,130,246,.35)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(59,130,246,.45)}
+  .btn-success{background:linear-gradient(135deg,#059669 0%,#10b981 100%);color:#fff;box-shadow:0 4px 14px rgba(16,185,129,.35)}
+  .btn-success:hover{transform:translateY(-2px)}
+  .btn-ghost{background:#fff;color:var(--primary);border:2px solid var(--primary-light)}
+  .btn-ghost:hover{background:#eff6ff;transform:translateY(-2px)}
+  .btn-whatsapp{background:linear-gradient(135deg,var(--whatsapp-dark) 0%,var(--whatsapp) 100%);color:#fff;box-shadow:0 4px 14px rgba(37,211,102,.40)}
+  .btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(37,211,102,.55)}
+  .btn-whatsapp svg{width:17px;height:17px}
+  .btn-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+
+  .send-note{background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border:1px solid #a7f3d0;border-radius:10px;padding:12px 16px;margin-top:12px;font-size:12.5px;color:#065f46;line-height:1.6;border-left:4px solid var(--whatsapp);display:flex;align-items:flex-start;gap:10px}
+  .send-note .sn-icon{font-size:18px;flex-shrink:0}
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.65);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;z-index:2000;animation:fadeIn .2s}
+  .modal-overlay.show{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:680px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,.35);animation:modalPop .3s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes modalPop{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+  .modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-radius:16px 16px 0 0;position:relative}
+  .modal-header h3{font-size:18px;font-weight:800;color:var(--primary);display:flex;align-items:center;gap:10px;padding-right:40px}
+  .modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:#fff;color:var(--text-light);border-radius:50%;cursor:pointer;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);transition:all .2s}
+  .modal-close:hover{background:var(--danger);color:#fff;transform:rotate(90deg)}
+  .modal-body{padding:22px 24px 26px}
+
+  /* ============================================ */
+  /* BUBU - CONEJITO ROSA ESPONJOSO (según foto)  */
+  /* ============================================ */
+  .cat-container{position:fixed;bottom:20px;left:20px;z-index:1500;cursor:pointer;user-select:none;transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+  .cat-container:hover{transform:scale(1.08)}
+  .cat-container.bounce{animation:bubuBounce .6s ease}
+  @keyframes bubuBounce{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-20px) scale(1.05)}60%{transform:translateY(-6px) scale(1.02)}}
+
+  .cat-svg{width:100px;height:auto;filter:drop-shadow(0 8px 16px rgba(232,121,168,.35))}
+
+  /* Parpadeo de ojos */
+  .cat-eye{transform-origin:center;animation:blink 4s infinite}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+
+  /* Orejas que se mueven suavemente */
+  .bubu-ear-l{transform-origin:32px 46px;animation:earWiggleL 3s ease-in-out infinite}
+  .bubu-ear-r{transform-origin:68px 46px;animation:earWiggleR 3s ease-in-out infinite}
+  @keyframes earWiggleL{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(2deg)}}
+  @keyframes earWiggleR{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-2deg)}}
+
+  /* Mejillas que palpitan */
+  .bubu-cheek{animation:cheekPulse 3s ease-in-out infinite}
+  @keyframes cheekPulse{0%,100%{opacity:.55}50%{opacity:.75}}
+
+  /* Cuerpo que respira */
+  .bubu-body{transform-origin:50px 105px;animation:breathe 3.5s ease-in-out infinite}
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+
+  .cat-bubble{position:absolute;bottom:100%;left:70px;background:#fff;padding:12px 16px;border-radius:14px;box-shadow:0 6px 20px rgba(232,121,168,.25);font-size:13.5px;font-family:var(--font-serif);font-style:italic;color:#831843;min-width:180px;max-width:240px;border:2px solid var(--bubu-pink);opacity:0;transform:translateY(6px) scale(.9);transition:all .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+  .cat-bubble.show{opacity:1;transform:translateY(0) scale(1)}
+  .cat-bubble::after{content:"";position:absolute;bottom:-10px;left:28px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:11px solid var(--bubu-pink)}
+
+  .help-btn{position:fixed;bottom:24px;right:24px;z-index:1500;width:70px;height:70px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,var(--purple) 0%,#a855f7 100%);color:#fff;font-size:26px;font-weight:800;box-shadow:0 8px 24px rgba(139,92,246,.45);display:flex;align-items:center;justify-content:center;transition:all .25s;font-family:inherit}
+  .help-btn:hover{transform:scale(1.08) rotate(-6deg)}
+  .help-btn::before{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--purple);opacity:.5;animation:pulse 2s infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.3);opacity:0}}
+  .help-btn .ex-badge{position:absolute;top:-4px;right:-4px;background:var(--accent);color:#fff;font-size:11px;font-weight:900;min-width:26px;height:26px;padding:0 7px;border-radius:13px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;z-index:3;opacity:0;transform:scale(.5);transition:all .3s;font-family:var(--font-sans)}
+  .help-btn .ex-badge.show{opacity:1;transform:scale(1)}
+
+  .score-display{text-align:center;padding:24px 0;margin-bottom:20px;border-bottom:1px solid var(--border)}
+  .score-circle{width:120px;height:120px;margin:0 auto 12px;border-radius:50%;background:conic-gradient(#10b981 var(--score,0%),#e2e8f0 0);display:flex;align-items:center;justify-content:center;position:relative}
+  .score-circle::after{content:"";position:absolute;inset:10px;background:#fff;border-radius:50%}
+  .score-value{position:relative;z-index:1;font-size:30px;font-weight:900;color:var(--primary);font-family:var(--font-serif)}
+  .score-label{font-size:13.5px;color:var(--text-light);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+  .block-result{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f8fafc;border-radius:10px;margin-bottom:10px;border-left:4px solid var(--primary-light)}
+  .block-result .br-icon{width:38px;height:38px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:19px;background:#dbeafe}
+  .block-result .br-info{flex:1}
+  .block-result .br-info h5{font-size:13.5px;font-weight:800;color:var(--text);margin-bottom:2px}
+  .block-result .br-info p{font-size:12.5px;color:var(--text-light)}
+  .block-result .br-score{font-size:17px;font-weight:900;font-family:var(--font-serif);color:var(--primary);white-space:nowrap}
+  .block-result.danger{border-left-color:var(--danger);background:#fef2f2}
+  .block-result.warning{border-left-color:var(--accent);background:#fffbeb}
+  .block-result.success{border-left-color:var(--success);background:#f0fdf4}
+
+  .recommendations{background:linear-gradient(135deg,#eff6ff 0%,#dbeafe 100%);border-radius:12px;padding:18px 22px;margin-top:16px;border-left:5px solid var(--primary)}
+  .recommendations h4{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--primary);margin-bottom:12px}
+  .recommendations ul{list-style:none;padding:0}
+  .recommendations li{font-size:14px;line-height:1.7;color:#1e40af;padding:8px 0 8px 28px;position:relative;border-bottom:1px dashed rgba(59,130,246,.25)}
+  .recommendations li:last-child{border-bottom:none}
+  .recommendations li::before{content:"→";position:absolute;left:8px;top:8px;color:var(--primary);font-weight:900}
+
+  .motivational{text-align:center;padding:22px 20px;margin-top:20px;background:linear-gradient(135deg,#fce7f3 0%,#fbcfe8 100%);border-radius:14px;border:2px solid var(--bubu-pink-dark)}
+  .motivational .emoji{font-size:44px;display:block;margin-bottom:8px}
+  .motivational h4{font-size:17px;font-weight:800;color:#831843;margin-bottom:6px}
+  .motivational p{font-size:14px;color:#9d174d;font-style:italic;font-family:var(--font-serif)}
+
+  .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:#831843;color:#fff;padding:14px 22px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);z-index:3000;opacity:0;transition:all .3s;max-width:90vw;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:640px){
+    .cat-svg{width:78px;height:auto}
+    .cat-bubble{left:50px;min-width:140px;font-size:12px}
+    .help-btn{width:60px;height:60px;font-size:22px}
+    .header-inner h1{font-size:21px}
+    .banner-body{padding:16px 14px}
+    .options,.numeric-input,.feedback{margin-left:0}
+    .exercise{padding:14px}
+    .nav-tab{padding:14px 12px;font-size:13px}
+    .section-header-block{flex-direction:column;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-inner">
+    <h1>📘 Guía Completa · Matemática 9no Grado</h1>
+    <p>Resumen ampliado · 36 ejercicios interactivos · Tu amiga Bubu 🐰</p>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <button class="nav-tab active" data-page="page-datos" onclick="showPage('page-datos')"><span>👤</span> Datos</button>
+    <button class="nav-tab" data-page="page-resumen" onclick="showPage('page-resumen')"><span>📚</span> Resumen <span class="num-badge">9</span></button>
+    <button class="nav-tab" data-page="page-ejercicios" onclick="showPage('page-ejercicios')"><span>✏️</span> Ejercicios <span class="num-badge">36</span></button>
+    <button class="nav-tab" data-page="page-practica" onclick="showPage('page-practica')"><span>📝</span> Práctica <span class="num-badge">5</span></button>
+    <button class="nav-tab" data-page="page-reporte" onclick="showPage('page-reporte')"><span>📊</span> Reporte</button>
+  </div>
+</nav>
+
+<!-- DATOS -->
+<section class="page-section active" id="page-datos">
+  <div class="container">
+    <div class="banner">
+      <div class="banner-header"><div class="banner-icon">👤</div><div><h2>Datos del estudiante</h2><p>Completa tus datos antes de comenzar</p></div></div>
+      <div class="banner-body">
+        <div class="form-grid">
+          <div class="field"><label for="input-nombre">Nombre y apellidos</label><input type="text" id="input-nombre" placeholder="Ej: Ana María Pérez López"></div>
+          <div class="field"><label for="input-grupo">Grupo</label><select id="input-grupo"><option value="">Seleccione…</option><option value="9no 1">9no 1</option><option value="9no 2">9no 2</option><option value="9no 3">9no 3</option></select></div>
+          <div class="field"><label for="input-lista">Número de lista</label><input type="number" id="input-lista" placeholder="Ej: 12" min="1" max="50"></div>
+          <div class="field"><label for="input-tel">Teléfono</label><input type="tel" id="input-tel" placeholder="Ej: 55512345"></div>
+        </div>
+        <button class="btn btn-primary" onclick="guardarDatos()" style="margin-top:18px"><span>💾</span> Guardar mis datos</button>
+        <div class="save-status" id="save-status"><span>✅</span><span>Datos guardados correctamente</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUMEN -->
+<section class="page-section" id="page-resumen">
+  <div class="container">
+    <div class="banner">
+      <div class="banner-header"><div class="banner-icon">📚</div><div><h2>Resumen ampliado de contenidos</h2><p>Material teórico completo · Sustituto del libro de texto</p></div></div>
+      <div class="banner-body">
+        <div class="sections-nav">
+          <button class="section-btn active" data-section="s1"><div class="sec-icon">🔺</div><div class="sec-info"><div class="sec-num">Sección 1</div><div class="sec-title">Igualdad de triángulos</div></div></button>
+          <button class="section-btn" data-section="s2"><div class="sec-icon">📦</div><div class="sec-info"><div class="sec-num">Sección 2</div><div class="sec-title">Áreas y volúmenes</div></div></button>
+          <button class="section-btn" data-section="s3"><div class="sec-icon">📐</div><div class="sec-info"><div class="sec-num">Sección 3</div><div class="sec-title">Signos de agrupación</div></div></button>
+          <button class="section-btn" data-section="s4"><div class="sec-icon">⚖️</div><div class="sec-info"><div class="sec-num">Sección 4</div><div class="sec-title">Ecuaciones lineales</div></div></button>
+          <button class="section-btn" data-section="s5"><div class="sec-icon">📈</div><div class="sec-info"><div class="sec-num">Sección 5</div><div class="sec-title">Funciones</div></div></button>
+          <button class="section-btn" data-section="s6"><div class="sec-icon">🔢</div><div class="sec-info"><div class="sec-num">Sección 6</div><div class="sec-title">Conjuntos numéricos</div></div></button>
+          <button class="section-btn" data-section="s7"><div class="sec-icon">🧮</div><div class="sec-info"><div class="sec-num">Sección 7</div><div class="sec-title">Cálculo y notación</div></div></button>
+          <button class="section-btn" data-section="s8"><div class="sec-icon">📊</div><div class="sec-info"><div class="sec-num">Sección 8</div><div class="sec-title">Datos simples</div></div></button>
+          <button class="section-btn" data-section="s9"><div class="sec-icon">📏</div><div class="sec-info"><div class="sec-num">Sección 9</div><div class="sec-title">Datos agrupados</div></div></button>
+        </div>
+
+        <div class="content-section active" id="section-s1">
+          <div class="section-header-block"><div class="shb-icon">🔺</div><div class="shb-text"><h3>Sección 1 · Igualdad de triángulos</h3><p>Conceptos, criterios y aplicaciones</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">1.1</span> Conceptos fundamentales</h4>
+            <div class="definition-box"><h5>📖 ¿Qué significa que dos triángulos sean iguales?</h5><p>Dos triángulos son <strong>iguales (o congruentes)</strong> cuando sus lados y ángulos homólogos son respectivamente iguales. Uno puede superponerse exactamente al otro mediante movimientos rígidos: <strong>traslación, rotación o simetría</strong>.</p><p>Se denota: <span class="formula-box">ΔABC ≅ ΔDEF</span></p></div>
+          </div>
+          <div class="sub-block">
+            <h4><span class="badge-num">1.2</span> Los tres criterios de igualdad</h4>
+            <table class="formula-table">
+              <thead><tr><th>Criterio</th><th>Abrev.</th><th>Condición</th></tr></thead>
+              <tbody>
+                <tr><td>Primer criterio</td><td>L-A-L</td><td>Dos lados y el ángulo comprendido</td></tr>
+                <tr><td>Segundo criterio</td><td>A-L-A</td><td>Un lado y dos ángulos adyacentes</td></tr>
+                <tr><td>Tercer criterio</td><td>L-L-L</td><td>Los tres lados</td></tr>
+              </tbody>
+            </table>
+            <div class="warning-box"><h5>⚠️ Error frecuente</h5><p>L-L-A NO es un criterio. Tres ángulos iguales solo garantizan semejanza.</p></div>
+          </div>
+          <div class="sub-block">
+            <h4><span class="badge-num">1.3</span> Ejemplo resuelto</h4>
+            <div class="example-box"><h5>✅ Demostración con L-A-L</h5><p><strong>Problema:</strong> AB y CD se cortan en M, punto medio de ambos.</p><div class="step"><p>1. AM = MB (punto medio).</p><p>2. DM = MC (punto medio).</p><p>3. ∠AMD = ∠BMC (opuestos por el vértice).</p><p>4. Por <strong>L-A-L</strong>: ΔAMD ≅ ΔBMC. ∎</p></div></div>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s2">
+          <div class="section-header-block"><div class="shb-icon">📦</div><div class="shb-text"><h3>Sección 2 · Áreas y volúmenes</h3><p>Prismas y pirámides</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">2.1</span> Prismas rectos</h4>
+            <table class="formula-table">
+              <thead><tr><th>Elemento</th><th>Fórmula</th></tr></thead>
+              <tbody>
+                <tr><td>Área lateral</td><td>A_l = P_b · h</td></tr>
+                <tr><td>Área total</td><td>A_t = A_l + 2·A_b</td></tr>
+                <tr><td>Volumen</td><td>V = A_b · h</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="sub-block">
+            <h4><span class="badge-num">2.2</span> Pirámides regulares</h4>
+            <table class="formula-table">
+              <thead><tr><th>Elemento</th><th>Fórmula</th></tr></thead>
+              <tbody>
+                <tr><td>Área lateral</td><td>A_l = (P_b·h_a)/2</td></tr>
+                <tr><td>Área total</td><td>A_t = A_l + A_b</td></tr>
+                <tr><td>Volumen</td><td>V = (1/3)·A_b·h</td></tr>
+              </tbody>
+            </table>
+            <div class="tip-box"><h5>🔑 Relación clave</h5><p><span class="formula-box">V_prisma = 3 · V_pirámide</span></p></div>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s3">
+          <div class="section-header-block"><div class="shb-icon">📐</div><div class="shb-text"><h3>Sección 3 · Signos de agrupación</h3><p>Paréntesis, corchetes y llaves</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">3.1</span> Regla fundamental</h4>
+            <table class="formula-table">
+              <thead><tr><th>Signo previo</th><th>Al eliminar</th></tr></thead>
+              <tbody>
+                <tr><td>Positivo ( + )</td><td>Términos mantienen signos</td></tr>
+                <tr><td>Negativo ( − )</td><td>TODOS cambian al opuesto</td></tr>
+              </tbody>
+            </table>
+            <div class="example-box"><h5>✅ Ejemplo</h5><p>A = 3x − [2y − (5x − 4y) + 7]</p><div class="step"><p>1. A = 3x − [2y − 5x + 4y + 7]</p><p>2. A = 3x − [−5x + 6y + 7]</p><p>3. A = 3x + 5x − 6y − 7</p><p><strong>A = 8x − 6y − 7</strong></p></div></div>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s4">
+          <div class="section-header-block"><div class="shb-icon">⚖️</div><div class="shb-text"><h3>Sección 4 · Ecuaciones lineales</h3><p>Modelación de problemas</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">4.1</span> Algoritmo de resolución</h4>
+            <ol><li>Declarar la variable (x).</li><li>Plantear la ecuación.</li><li>Resolver desplegando x.</li><li>Comprobar e interpretar.</li></ol>
+            <div class="example-box"><h5>✅ Ejemplo</h5><p>Suma de 3 consecutivos = 138.</p><div class="step"><p>x + (x+1) + (x+2) = 138</p><p>3x + 3 = 138 → x = 45</p><p><strong>Los números son 45, 46, 47.</strong></p></div></div>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s5">
+          <div class="section-header-block"><div class="shb-icon">📈</div><div class="shb-text"><h3>Sección 5 · Funciones</h3><p>Lineales y por tramos</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">5.1</span> Función lineal</h4>
+            <p style="text-align:center"><span class="formula-box">f(x) = mx + n</span></p>
+            <table class="formula-table">
+              <thead><tr><th>Parámetro</th><th>Significado</th></tr></thead>
+              <tbody>
+                <tr><td>m</td><td>Pendiente (razón de cambio)</td></tr>
+                <tr><td>n</td><td>Ordenada al origen</td></tr>
+              </tbody>
+            </table>
+            <div class="example-box"><h5>✅ Evaluación por tramos</h5><p>f(x) = 2x + 3 si x &lt; 1; f(x) = −x + 6 si x ≥ 1.</p><div class="step"><p>f(−2) = −4 + 3 = <strong>−1</strong></p><p>f(1) = −1 + 6 = <strong>5</strong></p><p>f(4) = −4 + 6 = <strong>2</strong></p></div></div>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s6">
+          <div class="section-header-block"><div class="shb-icon">🔢</div><div class="shb-text"><h3>Sección 6 · Conjuntos numéricos</h3><p>ℕ, ℤ, ℚ, 𝕀 y ℝ</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">6.1</span> Jerarquía</h4>
+            <p style="text-align:center;font-size:15px;font-family:var(--font-serif)">ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ &nbsp;|&nbsp; 𝕀 ⊂ ℝ</p>
+            <table class="formula-table">
+              <thead><tr><th>Símbolo</th><th>Uso</th></tr></thead>
+              <tbody>
+                <tr><td>∈ / ∉</td><td>Pertenencia (elemento → conjunto)</td></tr>
+                <tr><td>⊂ / ⊆</td><td>Inclusión (conjunto → conjunto)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s7">
+          <div class="section-header-block"><div class="shb-icon">🧮</div><div class="shb-text"><h3>Sección 7 · Cálculo y notación</h3><p>Notación científica y productos notables</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">7.1</span> Notación científica</h4>
+            <p style="text-align:center"><span class="formula-box">a × 10ⁿ, con 1 ≤ a &lt; 10</span></p>
+            <div class="tip-box"><h5>📌 Productos notables</h5><p>(a + b)(a − b) = a² − b²</p><p>(a + b)² = a² + 2ab + b²</p><p>(a − b)² = a² − 2ab + b²</p></div>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s8">
+          <div class="section-header-block"><div class="shb-icon">📊</div><div class="shb-text"><h3>Sección 8 · Datos simples</h3><p>Media, mediana y moda</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">8.1</span> Las tres medidas</h4>
+            <table class="formula-table">
+              <thead><tr><th>Medida</th><th>Algoritmo</th></tr></thead>
+              <tbody>
+                <tr><td>Media (x̄)</td><td>Σxᵢ / N</td></tr>
+                <tr><td>Mediana (Me)</td><td>Valor central de la serie ordenada</td></tr>
+                <tr><td>Moda (Mo)</td><td>Dato de mayor frecuencia</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="content-section" id="section-s9">
+          <div class="section-header-block"><div class="shb-icon">📏</div><div class="shb-text"><h3>Sección 9 · Datos agrupados</h3><p>Clases, marcas y medidas</p></div></div>
+          <div class="sub-block">
+            <h4><span class="badge-num">9.1</span> Conceptos y fórmulas</h4>
+            <table class="formula-table">
+              <thead><tr><th>Concepto</th><th>Fórmula</th></tr></thead>
+              <tbody>
+                <tr><td>Amplitud</td><td>i = L_s − L_i</td></tr>
+                <tr><td>Marca de clase</td><td>X_m = (L_i + L_s)/2</td></tr>
+                <tr><td>Media agrupada</td><td>x̄ = Σ(X_m · f_i)/N</td></tr>
+                <tr><td>Clase modal</td><td>Intervalo con mayor f_i</td></tr>
+                <tr><td>Clase mediana</td><td>Intervalo donde se alcanza N/2</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EJERCICIOS -->
+<section class="page-section" id="page-ejercicios">
+  <div class="container">
+    <div class="banner">
+      <div class="banner-header"><div class="banner-icon">✏️</div><div><h2>Ejercicios interactivos · 36 retos</h2><p>9 por bloque · Pulsa 💡 para ayuda</p></div></div>
+      <div class="banner-body">
+        <div class="progress-card">
+          <div class="progress-info"><h3>📊 Tu progreso</h3><p>Responde los 36 ejercicios</p></div>
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <div class="progress-count" id="progress-count">0 / 36</div>
+        </div>
+        <div id="ejercicios-container"></div>
+        <div class="btn-actions">
+          <button class="btn btn-success" onclick="autoevaluar()"><span>🎯</span> Autoevaluar</button>
+          <button class="btn btn-ghost" onclick="reiniciar()"><span>🔄</span> Reiniciar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÁCTICA -->
+<section class="page-section" id="page-practica">
+  <div class="container">
+    <div class="banner">
+      <div class="banner-header"><div class="banner-icon">📝</div><div><h2>Práctica adicional · Tipo examen</h2><p>5 problemas desarrollados</p></div></div>
+      <div class="banner-body">
+        <div class="practice-problem">
+          <div class="pp-header"><span class="pp-badge">Problema 1 · Geometría</span><span class="pp-title">Criterios de igualdad</span></div>
+          <div class="pp-statement">En el rectángulo ABCD, las diagonales AC y BD se cortan en O. Demuestre que ΔAOB ≅ ΔCOD.</div>
+          <button class="pp-solution-toggle" onclick="toggleSol(this)">👁 Ver solución</button>
+          <div class="pp-solution"><p><strong>1.</strong> AB = CD (opuestos).</p><p><strong>2.</strong> ∠OAB = ∠OCD (alternos internos).</p><p><strong>3.</strong> ∠OBA = ∠ODC (alternos internos).</p><p><strong>4.</strong> Por <strong>A-L-A</strong>: ΔAOB ≅ ΔCOD. ∎</p></div>
+        </div>
+        <div class="practice-problem">
+          <div class="pp-header"><span class="pp-badge">Problema 2 · Geometría</span><span class="pp-title">Áreas y volúmenes</span></div>
+          <div class="pp-statement">Pirámide regular cuadrada: lado 8 cm, altura 6 cm, apotema 5 cm. Calcule V, A_l y A_t.</div>
+          <button class="pp-solution-toggle" onclick="toggleSol(this)">👁 Ver solución</button>
+          <div class="pp-solution"><p><strong>a)</strong> A_b = 64 cm². V = (1/3)·64·6 = <strong>128 cm³</strong>.</p><p><strong>b)</strong> P_b = 32 cm. A_l = (32·5)/2 = <strong>80 cm²</strong>.</p><p><strong>c)</strong> A_t = 80 + 64 = <strong>144 cm²</strong>.</p></div>
+        </div>
+        <div class="practice-problem">
+          <div class="pp-header"><span class="pp-badge">Problema 3 · Álgebra</span><span class="pp-title">Ecuaciones lineales</span></div>
+          <div class="pp-statement">Un estudiante gasta 1/3 de sus ahorros en un libro y 2/5 de lo que le quedaba en merienda. Si aún le quedan $18, ¿cuánto tenía?</div>
+          <button class="pp-solution-toggle" onclick="toggleSol(this)">👁 Ver solución</button>
+          <div class="pp-solution"><p>Total = x. Libro = (1/3)x, queda (2/3)x.</p><p>Merienda = (4/15)x.</p><p>x − (1/3)x − (4/15)x = 18 → x = <strong>45</strong>.</p></div>
+        </div>
+        <div class="practice-problem">
+          <div class="pp-header"><span class="pp-badge">Problema 4 · Números</span><span class="pp-title">Notación científica</span></div>
+          <div class="pp-statement">Masa electrón = 9,11×10⁻³¹ kg. Masa protón = 1,67×10⁻²⁷ kg. ¿Cuántas veces es más masivo el protón?</div>
+          <button class="pp-solution-toggle" onclick="toggleSol(this)">👁 Ver solución</button>
+          <div class="pp-solution"><p>Razón ≈ 0,1833×10⁴ = <strong>1,833×10³</strong>.</p><p>El protón es ≈ <strong>1833 veces</strong> más masivo.</p></div>
+        </div>
+        <div class="practice-problem">
+          <div class="pp-header"><span class="pp-badge">Problema 5 · Estadística</span><span class="pp-title">Datos agrupados</span></div>
+          <div class="pp-statement">Salarios (CUP) de 30 trabajadores: [2000;3000):5; [3000;4000):12; [4000;5000):9; [5000;6000]:4. Calcule media, clase modal y clase mediana.</div>
+          <button class="pp-solution-toggle" onclick="toggleSol(this)">👁 Ver solución</button>
+          <div class="pp-solution"><p>Marcas: 2500, 3500, 4500, 5500. Suma: 117000.</p><p><strong>Media:</strong> 117000/30 = <strong>3900 CUP</strong>.</p><p><strong>Clase modal:</strong> [3000; 4000).</p><p><strong>Clase mediana:</strong> [3000; 4000).</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPORTE -->
+<section class="page-section" id="page-reporte">
+  <div class="container">
+    <div class="banner">
+      <div class="banner-header"><div class="banner-icon">📊</div><div><h2>Reporte de resultados</h2><p>Consulta y envía tus resultados</p></div></div>
+      <div class="banner-body" id="reporte-body">
+        <div style="text-align:center;padding:36px 20px;color:var(--text-light)">
+          <div style="font-size:52px;margin-bottom:12px">🎯</div>
+          <h3 style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px">Aún no has autoevaluado</h3>
+          <p style="font-size:13.5px;margin-bottom:18px">Ve a la sección <strong>Ejercicios</strong> y pulsa "Autoevaluar"</p>
+          <button class="btn btn-primary" onclick="showPage('page-ejercicios')">✏️ Ir a los ejercicios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- BUBU - CONEJITO ROSA (según foto)            -->
+<!-- ============================================ -->
+<div class="cat-container" id="cat-container" onclick="interactuarBubu()" title="¡Tócame!">
+  <div class="cat-bubble" id="cat-bubble">¡Hola! Soy Bubu 🐰</div>
+  <svg class="cat-svg" viewBox="0 0 100 135" xmlns="http://www.w3.org/2000/svg">
+    <!-- ============ OREJAS ============ -->
+    <!-- Oreja izquierda - exterior rosa -->
+    <g class="bubu-ear-l">
+      <ellipse cx="32" cy="24" rx="9.5" ry="23" fill="#f9a8c9" stroke="#e879a8" stroke-width="1.3"/>
+      <!-- Pelusa alrededor de la oreja -->
+      <path d="M 23 12 Q 22 8 25 6 Q 28 4 30 8 Q 32 5 35 6 Q 38 8 37 12" fill="#f9a8c9" stroke="none"/>
+      <!-- Interior claro de la oreja -->
+      <ellipse cx="32" cy="26" rx="5" ry="16" fill="#fde5f0"/>
+    </g>
+
+    <!-- Oreja derecha - exterior rosa -->
+    <g class="bubu-ear-r">
+      <ellipse cx="68" cy="24" rx="9.5" ry="23" fill="#f9a8c9" stroke="#e879a8" stroke-width="1.3"/>
+      <path d="M 63 12 Q 62 8 65 6 Q 68 4 70 8 Q 72 5 75 6 Q 78 8 77 12" fill="#f9a8c9" stroke="none"/>
+      <ellipse cx="68" cy="26" rx="5" ry="16" fill="#fde5f0"/>
+    </g>
+
+    <!-- ============ CUERPO ESPONJOSO ============ -->
+    <g class="bubu-body">
+      <!-- Cuerpo principal rosa -->
+      <ellipse cx="50" cy="102" rx="30" ry="30" fill="#f9a8c9" stroke="#e879a8" stroke-width="1.3"/>
+      <!-- Pelusas del cuerpo (arriba) -->
+      <circle cx="35" cy="78" r="4" fill="#f9a8c9"/>
+      <circle cx="65" cy="78" r="4" fill="#f9a8c9"/>
+      <circle cx="25" cy="88" r="4" fill="#f9a8c9"/>
+      <circle cx="75" cy="88" r="4" fill="#f9a8c9"/>
+      <circle cx="24" cy="105" r="4.5" fill="#f9a8c9"/>
+      <circle cx="76" cy="105" r="4.5" fill="#f9a8c9"/>
+      <circle cx="28" cy="120" r="4.5" fill="#f9a8c9"/>
+      <circle cx="72" cy="120" r="4.5" fill="#f9a8c9"/>
+      <circle cx="50" cy="128" r="5" fill="#f9a8c9"/>
+      <!-- Manchas claras (highlights) del cuerpo -->
+      <circle cx="40" cy="95" r="3" fill="#fde5f0" opacity="0.7"/>
+      <circle cx="60" cy="110" r="3.5" fill="#fde5f0" opacity="0.7"/>
+    </g>
+
+    <!-- ============ CABEZA / CAPUCHA ESPONJOSA ============ -->
+    <!-- Corona de pelusas alrededor de la cabeza -->
+    <circle cx="20" cy="48" r="4.5" fill="#f9a8c9"/>
+    <circle cx="18" cy="60" r="4.5" fill="#f9a8c9"/>
+    <circle cx="20" cy="72" r="4.5" fill="#f9a8c9"/>
+    <circle cx="23" cy="82" r="4.5" fill="#f9a8c9"/>
+    <circle cx="80" cy="48" r="4.5" fill="#f9a8c9"/>
+    <circle cx="82" cy="60" r="4.5" fill="#f9a8c9"/>
+    <circle cx="80" cy="72" r="4.5" fill="#f9a8c9"/>
+    <circle cx="77" cy="82" r="4.5" fill="#f9a8c9"/>
+    <!-- Flequillo de pelusas arriba -->
+    <circle cx="30" cy="35" r="4" fill="#f9a8c9"/>
+    <circle cx="42" cy="30" r="4" fill="#f9a8c9"/>
+    <circle cx="58" cy="30" r="4" fill="#f9a8c9"/>
+    <circle cx="70" cy="35" r="4" fill="#f9a8c9"/>
+
+    <!-- Cabeza rosa principal -->
+    <circle cx="50" cy="60" r="33" fill="#f9a8c9" stroke="#e879a8" stroke-width="1.3"/>
+
+    <!-- ============ CARA CREMA ============ -->
+    <ellipse cx="50" cy="65" rx="24" ry="22" fill="#fde5f0"/>
+
+    <!-- ============ MEJILLAS SONROSADAS ============ -->
+    <ellipse cx="33" cy="74" rx="5" ry="3.5" fill="#f9a8c9" class="bubu-cheek"/>
+    <ellipse cx="67" cy="74" rx="5" ry="3.5" fill="#f9a8c9" class="bubu-cheek"/>
+
+    <!-- ============ OJOS GRANDES ============ -->
+    <ellipse cx="40" cy="62" rx="7" ry="8.2" fill="#1a1a2e" class="cat-eye"/>
+    <ellipse cx="60" cy="62" rx="7" ry="8.2" fill="#1a1a2e" class="cat-eye"/>
+
+    <!-- Brillos de los ojos (3 por ojo) -->
+    <circle cx="42.5" cy="58.5" r="2.8" fill="#fff"/>
+    <circle cx="62.5" cy="58.5" r="2.8" fill="#fff"/>
+    <circle cx="37" cy="65" r="1.3" fill="#fff"/>
+    <circle cx="57" cy="65" r="1.3" fill="#fff"/>
+    <circle cx="43.5" cy="66" r="0.9" fill="#fff" opacity="0.8"/>
+    <circle cx="63.5" cy="66" r="0.9" fill="#fff" opacity="0.8"/>
+
+    <!-- ============ NARIZ ============ -->
+    <ellipse cx="50" cy="72" rx="3" ry="2.2" fill="#ec4899"/>
+
+    <!-- ============ BOCA ABIERTA SONRIENTE ============ -->
+    <!-- Contorno negro de la sonrisa -->
+    <path d="M 41 77 Q 50 87 59 77" stroke="#1e293b" fill="none" stroke-width="1.6" stroke-linecap="round"/>
+    <!-- Interior rosa/rojo de la boca -->
+    <path d="M 43 78 Q 50 85 57 78" fill="#ec4899" opacity="0.75"/>
+
+    <!-- ============ MANOS / PATITAS ============ -->
+    <ellipse cx="19" cy="103" rx="7.5" ry="6.5" fill="#fde5f0" stroke="#e879a8" stroke-width="1.1"/>
+    <ellipse cx="81" cy="103" rx="7.5" ry="6.5" fill="#fde5f0" stroke="#e879a8" stroke-width="1.1"/>
+
+    <!-- ============ PIES ============ -->
+    <ellipse cx="37" cy="127" rx="9.5" ry="5.5" fill="#fde5f0" stroke="#e879a8" stroke-width="1.1"/>
+    <ellipse cx="63" cy="127" rx="9.5" ry="5.5" fill="#fde5f0" stroke="#e879a8" stroke-width="1.1"/>
+  </svg>
+</div>
+
+<button class="help-btn" id="help-btn" onclick="abrirAyuda()" title="Ayuda contextual">
+  <span>💡</span>
+  <span class="ex-badge" id="ex-badge">—</span>
+</button>
+
+<div class="modal-overlay" id="modal-ayuda" onclick="if(event.target===this)cerrarAyuda()">
+  <div class="modal">
+    <div class="modal-header"><h3>💡 Aclaración del ejercicio</h3><button class="modal-close" onclick="cerrarAyuda()">✕</button></div>
+    <div class="modal-body" id="ayuda-body"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-eval" onclick="if(event.target===this)cerrarEval()">
+  <div class="modal">
+    <div class="modal-header"><h3>🎯 Resultados</h3><button class="modal-close" onclick="cerrarEval()">✕</button></div>
+    <div class="modal-body" id="eval-body"></div>
+  </div>
+</div>
+
+<script>
+const NUMERO_PROFESOR = '5356287815';
+const NOMBRE_PROFESOR = 'Prof. Isniel Portela Hernández';
+
+function showPage(pageId) {
+  document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  document.querySelector(`.nav-tab[data-page="${pageId}"]`).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const CAMPOS = ['input-nombre','input-grupo','input-lista','input-tel'];
+window.addEventListener('load', () => {
+  CAMPOS.forEach(id => {
+    const v = localStorage.getItem('guia9no_' + id);
+    if (v !== null) document.getElementById(id).value = v;
+  });
+  renderEjercicios();
+  configurarObservador();
+});
+
+function guardarDatos() {
+  const n = document.getElementById('input-nombre').value.trim();
+  const g = document.getElementById('input-grupo').value;
+  const l = document.getElementById('input-lista').value;
+  if (!n || !g || !l) { mostrarToast('⚠️ Completa nombre, grupo y n.º de lista'); return; }
+  CAMPOS.forEach(id => localStorage.setItem('guia9no_' + id, document.getElementById(id).value));
+  const s = document.getElementById('save-status');
+  s.classList.add('show');
+  setTimeout(() => s.classList.remove('show'), 2500);
+  mostrarToast('✅ ¡Datos guardados, ' + n.split(' ')[0] + '!');
+}
+
+document.querySelectorAll('.section-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.content-section').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('section-' + btn.dataset.section).classList.add('active');
+  });
+});
+
+function toggleSol(btn) {
+  const sol = btn.nextElementSibling;
+  sol.classList.toggle('show');
+  btn.innerHTML = sol.classList.contains('show') ? '🙈 Ocultar solución' : '👁 Ver solución';
+}
+
+const EJERCICIOS = [
+  { id:1, block:'geo', blockName:'Geometría', level:'Básico', question:'¿Cuál es el criterio: "dos lados y el ángulo comprendido iguales"?', type:'mc', options:['A-L-A','L-A-L','L-L-L','Ninguno'], correct:1, theory:'Los criterios son L-A-L, A-L-A y L-L-L.', hint:'La letra central indica el elemento entre los otros dos.', stepByStep:['L = lado, A = ángulo.','L-A-L = Lado-Ángulo-Lado.','Es el PRIMER criterio.'], commonMistakes:['Confundir con A-L-A.'], relatedConcept:'Se aplica en isósceles y rectángulos.' },
+  { id:2, block:'geo', blockName:'Geometría', level:'Básico', question:'Si dos triángulos tienen los tres ángulos iguales, ¿son iguales?', type:'mc', options:['Sí','No, son semejantes','Solo si equiláteros','Depende'], correct:1, theory:'Tres ángulos iguales = SEMEJANZA, no IGUALDAD.', hint:'Piensa en dos equiláteros de distinto tamaño.', stepByStep:['Solo con ángulos, lados pueden variar.','Ejemplo: 60° con lados 1,1,1 vs 5,5,5.','Misma forma → semejantes.'], commonMistakes:['Creer que son iguales.'], relatedConcept:'Base del Teorema de Tales.' },
+  { id:3, block:'geo', blockName:'Geometría', level:'Básico', question:'Volumen de prisma con base 9 m² y altura 4 m. (m³)', type:'numeric', answer:36, unit:'m³', theory:'V = A_b · h.', hint:'9 × 4.', stepByStep:['V = 9 · 4.','V = 36 m³.'], commonMistakes:['Usar fórmula de pirámide.'], relatedConcept:'1 m³ = 1000 L.' },
+  { id:4, block:'geo', blockName:'Geometría', level:'Intermedio', question:'Volumen de pirámide cuadrada de lado 6 cm y altura 4 cm. (cm³)', type:'numeric', answer:48, unit:'cm³', theory:'V = (1/3)·A_b·h.', hint:'A_b = 36.', stepByStep:['A_b = 36 cm².','V = (1/3)·36·4 = 48 cm³.'], commonMistakes:['Olvidar 1/3.'], relatedConcept:'3 pirámides = 1 prisma.' },
+  { id:5, block:'geo', blockName:'Geometría', level:'Básico', question:'Prisma y pirámide, misma base y altura. ¿Relación?', type:'mc', options:['Iguales','Pirámide = 2·prisma','Pirámide = (1/3)·prisma','Sin relación'], correct:2, theory:'V_prisma = 3·V_pirámide.', hint:'Compara fórmulas.', stepByStep:['V_prisma = A_b·h.','V_pirámide = (1/3)·A_b·h.','Razón = 3.'], commonMistakes:['Pensar que son iguales.'], relatedConcept:'Cono vs cilindro.' },
+  { id:6, block:'geo', blockName:'Geometría', level:'Intermedio', question:'Área total de prisma con base cuadrada de 3 m lado y 4 m altura. (m²)', type:'numeric', answer:66, unit:'m²', theory:'A_t = A_l + 2·A_b.', hint:'A_b = 9; A_l = 48.', stepByStep:['A_b = 9; P_b = 12; A_l = 48.','A_t = 48 + 18 = 66.'], commonMistakes:['Olvidar 2·A_b.'], relatedConcept:'Material de construcción.' },
+  { id:7, block:'geo', blockName:'Geometría', level:'Básico', question:'En isósceles, la bisectriz del vértice opuesto a la base es también:', type:'mc', options:['Solo bisectriz','Mediana y altura','Solo mediana','Nada especial'], correct:1, theory:'En isósceles: bisectriz = mediana = altura.', hint:'Propiedad fundamental.', stepByStep:['AB = AC.','L-A-L: ΔABD ≅ ΔACD.','BD = DC y ∠ADB = 90°.'], commonMistakes:['Creer que pasa en todos.'], relatedConcept:'Calcular alturas.' },
+  { id:8, block:'geo', blockName:'Geometría', level:'Intermedio', question:'Área lateral de prisma con base cuadrada 5 cm y altura 10 cm. (cm²)', type:'numeric', answer:200, unit:'cm²', theory:'A_l = P_b · h.', hint:'P_b = 20.', stepByStep:['P_b = 4·5 = 20.','A_l = 20·10 = 200.'], commonMistakes:['Calcular A_t.'], relatedConcept:'Etiquetado lateral.' },
+  { id:9, block:'geo', blockName:'Geometría', level:'Básico', question:'Diagonales del rectángulo son:', type:'mc', options:['Perpendiculares','Iguales','Distintas','Se cortan a 45°'], correct:1, theory:'En todo rectángulo las diagonales son iguales.', hint:'Se demuestra con L-A-L.', stepByStep:['AB = CD; BC = AD; ángulos 90°.','L-A-L → AC = BD.'], commonMistakes:['Confundir con rombo.'], relatedConcept:'En cuadrado son iguales y perpendiculares.' },
+  { id:10, block:'alg', blockName:'Álgebra', level:'Intermedio', question:'Simplifica: 3x − [2y − (5x − 4y) + 7]', type:'mc', options:['8x − 6y − 7','8x + 6y + 7','2x − 6y − 7','8x − 2y − 7'], correct:0, theory:'Eliminar de dentro hacia fuera.', hint:'Paréntesis → corchete.', stepByStep:['A = 3x − [2y − 5x + 4y + 7]','A = 3x − [−5x + 6y + 7]','A = 8x − 6y − 7'], commonMistakes:['No cambiar +7.'], relatedConcept:'Esencial en ecuaciones.' },
+  { id:11, block:'alg', blockName:'Álgebra', level:'Básico', question:'Paréntesis con (−): ¿qué ocurre con los signos?', type:'mc', options:['Se mantienen','Cambia el primero','TODOS cambian','Solo negativos'], correct:2, theory:'Todos cambian al opuesto.', hint:'Distributiva con −1.', stepByStep:['−(a+b−c) = −a−b+c.','Todos cambian.'], commonMistakes:['Cambiar solo el primero.'], relatedConcept:'Resta de polinomios.' },
+  { id:12, block:'alg', blockName:'Álgebra', level:'Básico', question:'Suma de 3 enteros consecutivos = 138. ¿Menor?', type:'numeric', answer:45, unit:'', theory:'x + (x+1) + (x+2) = 138.', hint:'3x + 3 = 138.', stepByStep:['3x = 135.','x = 45.'], commonMistakes:['Usar x, x+2, x+4.'], relatedConcept:'Modelación algebraica.' },
+  { id:13, block:'alg', blockName:'Álgebra', level:'Básico', question:'f(x)=2x+3 si x<1; f(x)=−x+6 si x≥1. ¿f(1)?', type:'numeric', answer:5, unit:'', theory:'x=1 ≥ 1 → segundo tramo.', hint:'f(1) = −1+6.', stepByStep:['1 ≥ 1 → segundo tramo.','f(1) = 5.'], commonMistakes:['Usar primer tramo.'], relatedConcept:'Tarifas.' },
+  { id:14, block:'alg', blockName:'Álgebra', level:'Básico', question:'Taxi $20 fijos + $5/km. ¿Costo de 12 km? ($)', type:'numeric', answer:80, unit:'$', theory:'C(x) = 5x + 20.', hint:'5·12 + 20.', stepByStep:['C(12) = 60 + 20 = 80.'], commonMistakes:['Olvidar cargo fijo.'], relatedConcept:'Función lineal.' },
+  { id:15, block:'alg', blockName:'Álgebra', level:'Intermedio', question:'(2x−1)/3 − (x+3)/2 = 1. ¿x?', type:'numeric', answer:17, unit:'', theory:'Multiplica por 6.', hint:'4x−2−3x−9 = 6.', stepByStep:['×6: 2(2x−1) − 3(x+3) = 6.','x − 11 = 6.','x = 17.'], commonMistakes:['Error al distribuir.'], relatedConcept:'Ecuaciones con fracciones.' },
+  { id:16, block:'alg', blockName:'Álgebra', level:'Intermedio', question:'Empleado: $2500 + 5% de $10 000 ($)', type:'numeric', answer:3000, unit:'$', theory:'I = 2500 + 0,05v.', hint:'0,05·10000 = 500.', stepByStep:['Comisión = 500.','Total = 3000.'], commonMistakes:['5% vs 50%.'], relatedConcept:'Comisiones.' },
+  { id:17, block:'alg', blockName:'Álgebra', level:'Básico', question:'Tanque 500 L a 25 L/min. ¿Minutos?', type:'numeric', answer:20, unit:'min', theory:'V(t) = 500 − 25t = 0.', hint:'t = 500/25.', stepByStep:['25t = 500.','t = 20.'], commonMistakes:['Dividir al revés.'], relatedConcept:'Decreciente.' },
+  { id:18, block:'alg', blockName:'Álgebra', level:'Básico', question:'¿m en f(x) = 5x + 20?', type:'numeric', answer:5, unit:'', theory:'En f(x)=mx+n, m = coef. de x.', hint:'Antes de la x.', stepByStep:['Coef. de x = 5.','m = 5.'], commonMistakes:['Confundir con n.'], relatedConcept:'Pendiente.' },
+  { id:19, block:'num', blockName:'Números reales', level:'Básico', question:'¿−5 ∈ ℕ?', type:'mc', options:['Sí','No, ℕ no tiene negativos','Sí, como ℤ','Depende'], correct:1, theory:'ℕ no incluye negativos.', hint:'¿Hay negativos en ℕ?', stepByStep:['ℕ = {0,1,2,...}.','−5 ∉ ℕ; sí ∈ ℤ.'], commonMistakes:['Confundir ℕ con ℤ.'], relatedConcept:'Clasificación.' },
+  { id:20, block:'num', blockName:'Números reales', level:'Básico', question:'¿√2 pertenece a?', type:'mc', options:['ℕ','ℤ','ℚ','𝕀'], correct:3, theory:'√2 es irracional.', hint:'Decimales infinitos no periódicos.', stepByStep:['√2 no es a/b.','Es irracional.'], commonMistakes:['Confundir con 1,41.'], relatedConcept:'π, e, φ.' },
+  { id:21, block:'num', blockName:'Números reales', level:'Intermedio', question:'¿Qué caracteriza a ℚ?', type:'mc', options:['Discreto','Denso','Primer elemento','Finito'], correct:1, theory:'ℚ es denso.', hint:'Entre 1/3 y 1/2 hay 5/12.', stepByStep:['Entre a<b existe c.','Ejemplo: 5/12.','Denso.'], commonMistakes:['Confundir con discreto.'], relatedConcept:'ℝ también denso.' },
+  { id:22, block:'num', blockName:'Números reales', level:'Intermedio', question:'(3+√2)(3−√2) = ?', type:'numeric', answer:7, unit:'', theory:'a² − b².', hint:'9 − 2.', stepByStep:['9 − (√2)².','9 − 2 = 7.'], commonMistakes:['No elevar √2.'], relatedConcept:'Racionalización.' },
+  { id:23, block:'num', blockName:'Números reales', level:'Intermedio', question:'Exponente de 10 en 0,000 000 000 911', type:'numeric', answer:-10, unit:'', theory:'9,11 × 10⁻¹⁰.', hint:'Contar lugares.', stepByStep:['9,11 × 10⁻¹⁰.'], commonMistakes:['Signo.'], relatedConcept:'Ciencias.' },
+  { id:24, block:'num', blockName:'Números reales', level:'Básico', question:'Si ℕ ⊂ ℤ, ¿qué es verdad?', type:'mc', options:['Todo ℤ es ℕ','Todo ℕ es ℤ','Todo ℚ es ℤ','Todo 𝕀 es ℚ'], correct:1, theory:'ℕ ⊂ ℤ: todo natural es entero.', hint:'Lee la inclusión.', stepByStep:['ℕ dentro de ℤ.','Todo x ∈ ℕ → x ∈ ℤ.'], commonMistakes:['Leer al revés.'], relatedConcept:'Cadena ℕ⊂ℤ⊂ℚ⊂ℝ.' },
+  { id:25, block:'num', blockName:'Números reales', level:'Básico', question:'¿Cuál es irracional?', type:'mc', options:['0,25','1/3','π','−7'], correct:2, theory:'π es irracional.', hint:'Decimales infinitos.', stepByStep:['0,25 y 1/3 son racionales.','π no es fracción.','π es irracional.'], commonMistakes:['Confundir 1/3.'], relatedConcept:'Irracionales famosos.' },
+  { id:26, block:'num', blockName:'Números reales', level:'Básico', question:'1/3 + 1/6 (decimal)', type:'numeric', answer:0.5, unit:'', theory:'m.c.m. = 6.', hint:'1/3 = 2/6.', stepByStep:['2/6 + 1/6 = 3/6.','3/6 = 0,5.'], commonMistakes:['Sumar directo.'], relatedConcept:'Probabilidades.' },
+  { id:27, block:'num', blockName:'Números reales', level:'Básico', question:'Notación científica de 4 500 000', type:'mc', options:['4,5 × 10⁶','45 × 10⁵','0,45 × 10⁷','4,5 × 10⁻⁶'], correct:0, theory:'Coeficiente entre 1 y 10.', hint:'Coma 6 lugares.', stepByStep:['4,5 × 10⁶.'], commonMistakes:['Coef. fuera de [1,10).'], relatedConcept:'Astronomía.' },
+  { id:28, block:'est', blockName:'Estadística', level:'Básico', question:'Notas: 12,15,18,15,20,14,15,17,18,16. ¿Media?', type:'numeric', answer:16, unit:'pts', theory:'x̄ = Σ/N.', hint:'Suma = 160.', stepByStep:['160 / 10 = 16.'], commonMistakes:['Error división.'], relatedConcept:'Afectada por extremos.' },
+  { id:29, block:'est', blockName:'Estadística', level:'Básico', question:'Mismos datos, ¿MODA?', type:'numeric', answer:15, unit:'', theory:'Mayor frecuencia.', hint:'15 aparece 3 veces.', stepByStep:['15 → 3 veces.','Mo = 15.'], commonMistakes:['Confundir con media.'], relatedConcept:'Cualitativas.' },
+  { id:30, block:'est', blockName:'Estadística', level:'Intermedio', question:'Mismos datos, ¿MEDIANA?', type:'numeric', answer:15.5, unit:'', theory:'N par → promedio centrales.', hint:'Ordena y promedia.', stepByStep:['Centrales: 15 y 16.','Me = 15,5.'], commonMistakes:['No ordenar.'], relatedConcept:'Preferible con extremos.' },
+  { id:31, block:'est', blockName:'Estadística', level:'Básico', question:'Fórmula MARCA DE CLASE', type:'mc', options:['L_s − L_i','(L_i + L_s)/2','L_s · L_i','(L_s − L_i)/2'], correct:1, theory:'Xₘ = punto medio.', hint:'Promedio extremos.', stepByStep:['Xₘ = (L_i + L_s)/2.'], commonMistakes:['Confundir con amplitud.'], relatedConcept:'Datos agrupados.' },
+  { id:32, block:'est', blockName:'Estadística', level:'Básico', question:'[25; 35) → Xₘ = ?', type:'numeric', answer:30, unit:'', theory:'(25+35)/2.', hint:'Suma y divide.', stepByStep:['60/2 = 30.'], commonMistakes:['Restar.'], relatedConcept:'Representante.' },
+  { id:33, block:'est', blockName:'Estadística', level:'Básico', question:'[20;30):4, [30;40):7, [40;50):3, [50;60]:1. CLASE MODAL', type:'mc', options:['[20;30)','[30;40)','[40;50)','[50;60]'], correct:1, theory:'Intervalo con mayor f.', hint:'Busca mayor f.', stepByStep:['Mayor f = 7 en [30;40).'], commonMistakes:['Confundir.'], relatedConcept:'Concentración.' },
+  { id:34, block:'est', blockName:'Estadística', level:'Avanzado', question:'[150;160):4, [160;170):8, [170;180):6, [180;190]:2. ¿Media? (cm)', type:'numeric', answer:168, unit:'cm', theory:'x̄ = Σ(Xₘ·fᵢ)/N.', hint:'Suma productos: 3360.', stepByStep:['Marcas: 155,165,175,185.','Productos: 620,1320,1050,370.','Suma = 3360.','N = 20.','x̄ = 168.'], commonMistakes:['Usar límites.'], relatedConcept:'Aproximación.' },
+  { id:35, block:'est', blockName:'Estadística', level:'Intermedio', question:'Misma tabla, CLASE MEDIANA', type:'mc', options:['[150;160)','[160;170)','[170;180)','[180;190]'], correct:1, theory:'N=20, posiciones 10 y 11.', hint:'F₁=4, F₂=12.', stepByStep:['F₂ = 12 ≥ 10.','Clase mediana [160;170).'], commonMistakes:['Usar f absolutas.'], relatedConcept:'Valor central.' },
+  { id:36, block:'est', blockName:'Estadística', level:'Intermedio', question:'Si media > mediana, sesgo es:', type:'mc', options:['Simétrica','A la derecha','A la izquierda','Uniforme'], correct:1, theory:'x̄ > Me → sesgo positivo.', hint:'Extremos altos jalan media.', stepByStep:['Simétrica: x̄ ≈ Me.','Con extremos altos: x̄ > Me.'], commonMistakes:['Confundir lado.'], relatedConcept:'Salarios.' }
+];
+
+let respuestas = {};
+let ultimoReporte = null;
+let ejercicioActual = null;
+
+function renderEjercicios() {
+  const c = document.getElementById('ejercicios-container');
+  c.innerHTML = '';
+  const bloques = ['geo','alg','num','est'];
+  const nombres = { geo:'Geometría', alg:'Álgebra', num:'Números reales', est:'Estadística' };
+  const iconos = { geo:'🔺', alg:'📐', num:'🔢', est:'📊' };
+  bloques.forEach(b => {
+    const ejs = EJERCICIOS.filter(e => e.block === b);
+    const s = document.createElement('div');
+    s.className = 'block-section';
+    s.innerHTML = `<div class="block-title"><span>${iconos[b]}</span> ${nombres[b]} (${ejs.length})</div>`;
+    ejs.forEach(ej => {
+      const card = document.createElement('div');
+      card.className = 'exercise';
+      card.dataset.id = ej.id;
+      const nivelClass = ej.level.toLowerCase();
+      let rH = '';
+      if (ej.type === 'mc') {
+        rH = '<div class="options">';
+        ej.options.forEach((op, i) => {
+          rH += `<label class="option" data-option="${i}"><input type="radio" name="ex-${ej.id}" value="${i}"><span>${op}</span></label>`;
+        });
+        rH += '</div>';
+      } else {
+        rH = `<div class="numeric-input"><input type="text" id="input-${ej.id}" placeholder="Escribe tu respuesta…" inputmode="decimal">${ej.unit ? `<span class="unit">${ej.unit}</span>` : ''}</div>`;
+      }
+      card.innerHTML = `<div class="exercise-header"><div class="ex-num">${ej.id}</div><div class="ex-question">${ej.question}</div><div class="ex-meta"><span class="ex-level ${nivelClass}">${ej.level}</span></div><button class="ex-help" onclick="abrirAyudaEjercicio(${ej.id})" title="Aclaración detallada">💡</button></div>${rH}<div class="feedback" id="feedback-${ej.id}"></div>`;
+      s.appendChild(card);
+    });
+    c.appendChild(s);
+  });
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const card = opt.closest('.exercise');
+      card.querySelectorAll('input[type="radio"]').forEach(r => { r.checked = r.value === opt.dataset.option; });
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      respuestas[card.dataset.id] = parseInt(opt.dataset.option);
+      actualizarProgreso();
+    });
+  });
+  document.querySelectorAll('input[type="text"][id^="input-"]').forEach(inp => {
+    inp.addEventListener('input', () => {
+      respuestas[inp.id.replace('input-', '')] = inp.value.trim();
+      actualizarProgreso();
+    });
+  });
+}
+
+function configurarObservador() {
+  const observer = new IntersectionObserver((entries) => {
+    let mejor = null, mejorRatio = 0;
+    entries.forEach(e => { if (e.isIntersecting && e.intersectionRatio > mejorRatio) { mejorRatio = e.intersectionRatio; mejor = e.target; } });
+    if (mejor) {
+      const id = parseInt(mejor.dataset.id);
+      if (id !== ejercicioActual) {
+        ejercicioActual = id;
+        document.querySelectorAll('.exercise').forEach(e => e.classList.remove('current'));
+        mejor.classList.add('current');
+        const badge = document.getElementById('ex-badge');
+        badge.textContent = id;
+        badge.classList.add('show');
+      }
+    }
+  }, { rootMargin: '-30% 0px -40% 0px' });
+  document.querySelectorAll('.exercise').forEach(ex => observer.observe(ex));
+}
+
+function actualizarProgreso() {
+  const r = Object.keys(respuestas).filter(id => { const v = respuestas[id]; return v !== '' && v !== undefined && v !== null; }).length;
+  document.getElementById('progress-fill').style.width = Math.round((r/36)*100) + '%';
+  document.getElementById('progress-count').textContent = `${r} / 36`;
+}
+
+function autoevaluar() {
+  const nombre = document.getElementById('input-nombre').value.trim();
+  const grupo = document.getElementById('input-grupo').value;
+  const lista = document.getElementById('input-lista').value;
+  const tel = document.getElementById('input-tel').value.trim();
+  const stats = { geo:{correct:0,total:0,nombre:'Geometría',icon:'🔺'}, alg:{correct:0,total:0,nombre:'Álgebra',icon:'📐'}, num:{correct:0,total:0,nombre:'Números reales',icon:'🔢'}, est:{correct:0,total:0,nombre:'Estadística',icon:'📊'} };
+  let totalCorrect = 0, totalAnswered = 0;
+  EJERCICIOS.forEach(ej => {
+    stats[ej.block].total++;
+    const r = respuestas[ej.id];
+    if (r === undefined || r === '') return;
+    totalAnswered++;
+    let ok = false;
+    if (ej.type === 'mc') ok = parseInt(r) === ej.correct;
+    else { const v = parseFloat(String(r).replace(',', '.')); ok = Math.abs(v - ej.answer) < 0.01; }
+    if (ok) { stats[ej.block].correct++; totalCorrect++; }
+    const card = document.querySelector(`.exercise[data-id="${ej.id}"]`);
+    const fb = document.getElementById(`feedback-${ej.id}`);
+    if (card && fb) {
+      card.classList.remove('correct','incorrect');
+      card.classList.add(ok ? 'correct' : 'incorrect');
+      fb.classList.add('show', ok ? 'ok' : 'no');
+      if (ok) fb.innerHTML = `<strong>✅ ¡Correcto!</strong> ${ej.theory}`;
+      else { const rc = ej.type === 'mc' ? ej.options[ej.correct] : ej.answer + (ej.unit ? ' ' + ej.unit : ''); fb.innerHTML = `<strong>❌ Incorrecto.</strong> Correcta: <strong>${rc}</strong>. ${ej.theory}`; }
+      if (ej.type === 'mc') card.querySelectorAll('.option').forEach((op, i) => { if (i === ej.correct) op.classList.add('correct-answer'); if (i === parseInt(r) && !ok) op.classList.add('incorrect-answer'); });
+    }
+  });
+  const pct = totalAnswered > 0 ? Math.round((totalCorrect / EJERCICIOS.length) * 100) : 0;
+  ultimoReporte = { nombre, grupo, lista, tel, stats, totalCorrect, totalAnswered, pct };
+  renderReporte();
+  showPage('page-reporte');
+  mostrarToast('✅ Autoevaluación completada.');
+}
+
+function renderReporte() {
+  if (!ultimoReporte) return;
+  const r = ultimoReporte;
+  const body = document.getElementById('reporte-body');
+  let ev = '';
+  if (r.pct >= 90) ev = '¡Excelente! Dominas los contenidos 🏆';
+  else if (r.pct >= 70) ev = '¡Buen trabajo! 👍';
+  else if (r.pct >= 50) ev = 'Vas por buen camino 📖';
+  else ev = 'Necesitas repasar 📚';
+  let html = '';
+  if (r.nombre) html += `<p style="text-align:center;font-size:14px;color:var(--text-light);margin-bottom:12px">Estudiante: <strong style="color:var(--text)">${r.nombre}</strong>${r.grupo ? ` · ${r.grupo}` : ''}${r.lista ? ` · Nº ${r.lista}` : ''}</p>`;
+  html += `<div class="score-display"><div class="score-circle" style="--score:${r.pct}%"><span class="score-value">${r.pct}%</span></div><div class="score-label">${r.totalCorrect} de ${EJERCICIOS.length} correctos</div><p style="margin-top:10px;font-size:14px;font-weight:700;color:var(--primary)">${ev}</p></div>`;
+  html += `<h4 style="font-size:12.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;font-weight:800">📊 Desglose por bloque</h4>`;
+  ['geo','alg','num','est'].forEach(k => {
+    const s = r.stats[k];
+    const p = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+    let cl = 'success'; if (p < 50) cl = 'danger'; else if (p < 75) cl = 'warning';
+    html += `<div class="block-result ${cl}"><div class="br-icon">${s.icon}</div><div class="br-info"><h5>${s.nombre}</h5><p>${s.correct} de ${s.total} · ${p}%</p></div><div class="br-score">${p}%</div></div>`;
+  });
+  const recs = [];
+  ['geo','alg','num','est'].forEach(k => {
+    const s = r.stats[k];
+    const p = s.total > 0 ? (s.correct / s.total) * 100 : 0;
+    if (p < 75) {
+      if (k === 'geo') recs.push('Refuerza los <strong>criterios de igualdad de triángulos</strong> y las fórmulas de <strong>área y volumen</strong>.');
+      if (k === 'alg') recs.push('Repasa los <strong>signos de agrupación</strong>, las <strong>ecuaciones lineales</strong> y las <strong>funciones</strong>.');
+      if (k === 'num') recs.push('Practica las <strong>relaciones entre conjuntos numéricos</strong> y la <strong>notación científica</strong>.');
+      if (k === 'est') recs.push('Revisa el cálculo de <strong>media, mediana y moda</strong>, y la <strong>marca de clase</strong>.');
+    }
+  });
+  if (recs.length === 0) recs.push('¡Felicidades! Dominas todos los contenidos.');
+  html += `<div class="recommendations"><h4>💡 Recomendaciones personalizadas</h4><ul>${recs.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
+  let mf, em;
+  if (r.pct >= 90) { em = '🏆'; mf = '¡Eres una estrella de las matemáticas!'; }
+  else if (r.pct >= 70) { em = '🌟'; mf = 'Vas muy bien. Con un poco más de práctica dominarás todo.'; }
+  else if (r.pct >= 50) { em = '💪'; mf = 'Todo esfuerzo tiene recompensa. Repasa y vuelve a intentarlo.'; }
+  else { em = '📚'; mf = 'No te desanimes. Cada error es una oportunidad para aprender.'; }
+  html += `<div class="motivational"><span class="emoji">${em}</span><h4>${mf}</h4><p>La matemática se aprende <strong>practicando</strong>.</p></div>`;
+  html += `<div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--border)"><h4 style="font-size:12.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;font-weight:800;text-align:center">📤 Enviar al profesor</h4><div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap"><button class="btn btn-whatsapp" onclick="enviarWhatsApp()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar al profesor</button><button class="btn btn-ghost" onclick="reiniciar()"><span>🔄</span> Reiniciar</button></div><div class="send-note"><span class="sn-icon">📱</span><div>Se enviará a <strong>${NOMBRE_PROFESOR}</strong> (WhatsApp <strong>+53 56287815</strong>).</div></div></div>`;
+  body.innerHTML = html;
+}
+
+function enviarWhatsApp() {
+  if (!ultimoReporte) { mostrarToast('⚠️ Primero autoevalúa.'); return; }
+  const r = ultimoReporte;
+  if (!r.nombre) { mostrarToast('⚠️ Escribe tu nombre.'); showPage('page-datos'); return; }
+  const ahora = new Date();
+  const fecha = ahora.toLocaleDateString('es-ES', {day:'2-digit',month:'2-digit',year:'numeric'});
+  const hora = ahora.toLocaleTimeString('es-ES', {hour:'2-digit',minute:'2-digit'});
+  let ev = ''; if (r.pct >= 90) ev = '¡Excelente! 🏆'; else if (r.pct >= 70) ev = '¡Buen trabajo! 👍'; else if (r.pct >= 50) ev = 'Necesita reforzar 📖'; else ev = 'Requiere repaso 📚';
+  const recs = [];
+  ['geo','alg','num','est'].forEach(k => {
+    const s = r.stats[k];
+    const p = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+    if (p < 75) {
+      if (k === 'geo') recs.push('Geometría: reforzar criterios y fórmulas.');
+      if (k === 'alg') recs.push('Álgebra: repasar signos, ecuaciones y funciones.');
+      if (k === 'num') recs.push('Números: practicar conjuntos y notación.');
+      if (k === 'est') recs.push('Estadística: revisar medidas y marca de clase.');
+    }
+  });
+  if (recs.length === 0) recs.push('¡Dominio completo!');
+  const lineas = ['📊 *REPORTE DE AUTOEVALUACIÓN*','*Matemática · 9no Grado*','━━━━━━━━━━━━━━━━━━━━','','👤 *Datos*',`• Nombre: ${r.nombre}`,`• Grupo: ${r.grupo||'N/E'}`,`• Nº lista: ${r.lista||'N/E'}`,r.tel?`• Teléfono: ${r.tel}`:'','','━━━━━━━━━━━━━━━━━━━━',`🎯 *Resultado:* ${r.pct}%`,`• Correctas: ${r.totalCorrect} de ${EJERCICIOS.length}`,`• Evaluación: ${ev}`,'','📚 *Desglose*','🔺 Geometría: '+r.stats.geo.correct+'/'+r.stats.geo.total,'📐 Álgebra: '+r.stats.alg.correct+'/'+r.stats.alg.total,'🔢 Números: '+r.stats.num.correct+'/'+r.stats.num.total,'📊 Estadística: '+r.stats.est.correct+'/'+r.stats.est.total,'','💡 *Recomendaciones*',...recs.map(x => '• '+x),'','━━━━━━━━━━━━━━━━━━━━',`📅 Enviado: ${fecha} a las ${hora}`,'','📘 Guía 9no Grado','👨‍🏫 '+NOMBRE_PROFESOR].filter(l => l !== '');
+  const url = 'https://wa.me/' + NUMERO_PROFESOR + '?text=' + encodeURIComponent(lineas.join('\n'));
+  try { const w = window.open(url, '_blank'); if (!w) window.location.href = url; mostrarToast('✅ Abriendo WhatsApp…'); } catch(e) { mostrarToast('⚠️ No se pudo abrir WhatsApp.'); }
+}
+
+function reiniciar() {
+  respuestas = {}; ultimoReporte = null;
+  document.querySelectorAll('.exercise').forEach(card => {
+    card.classList.remove('correct','incorrect');
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('selected','correct-answer','incorrect-answer'));
+    card.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    card.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+    const fb = card.querySelector('.feedback');
+    if (fb) { fb.classList.remove('show','ok','no'); fb.innerHTML = ''; }
+  });
+  actualizarProgreso();
+  document.getElementById('reporte-body').innerHTML = `<div style="text-align:center;padding:36px 20px;color:var(--text-light)"><div style="font-size:52px;margin-bottom:12px">🎯</div><h3 style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px">Aún no has autoevaluado</h3><p style="font-size:13.5px;margin-bottom:18px">Ve a Ejercicios y pulsa "Autoevaluar"</p><button class="btn btn-primary" onclick="showPage('page-ejercicios')">✏️ Ir a los ejercicios</button></div>`;
+  mostrarToast('🔄 Ejercicios reiniciados.');
+}
+
+function abrirAyuda() {
+  if (ejercicioActual === null) {
+    document.getElementById('ayuda-body').innerHTML = `<div class="tip-box"><h5>📖 ¿Cómo funciona este botón?</h5><p>Detecta automáticamente el ejercicio visible y muestra:</p><ul><li>📚 Teoría aplicada</li><li>🔢 Solución paso a paso</li><li>⚠️ Errores comunes</li><li>🔗 Conceptos relacionados</li><li>💡 Pista adicional</li></ul></div><div class="tip-box" style="background:linear-gradient(135deg,#fce7f3 0%,#fbcfe8 100%);border-left-color:#e879a8"><h5 style="color:#831843">🐰 Consejo de Bubu</h5><p style="color:#9d174d">Cada error es una oportunidad para aprender. ¡Tú puedes!</p></div>`;
+    document.getElementById('modal-ayuda').classList.add('show');
+    return;
+  }
+  abrirAyudaEjercicio(ejercicioActual);
+}
+
+function abrirAyudaEjercicio(id) {
+  ejercicioActual = id;
+  const ej = EJERCICIOS.find(e => e.id === id);
+  if (!ej) return;
+  let html = `<div style="background:linear-gradient(135deg,#fce7f3 0%,#fbcfe8 100%);border-radius:10px;padding:12px 16px;margin-bottom:14px;border-left:4px solid var(--bubu-pink-dark)"><div style="font-size:10.5px;font-weight:800;color:#831843;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Ejercicio ${ej.id} · ${ej.blockName} · Nivel ${ej.level}</div><div style="font-family:var(--font-serif);font-size:14.5px;color:#4c1d95;line-height:1.6">${ej.question}</div></div>`;
+  html += `<div class="tip-box"><h5>📚 Teoría aplicada</h5><p>${ej.theory}</p></div>`;
+  if (ej.stepByStep) {
+    html += `<div style="background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border-left:4px solid #0ea5e9;border-radius:10px;padding:14px 16px;margin-bottom:12px"><h5 style="font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#0369a1;margin-bottom:8px">🔢 Solución paso a paso</h5>`;
+    ej.stepByStep.forEach((p,i) => { html += `<div style="display:flex;gap:10px;margin-bottom:8px;background:rgba(255,255,255,.55);padding:8px 12px;border-radius:8px"><div style="flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#0ea5e9;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900">${i+1}</div><div style="flex:1;font-family:var(--font-serif);font-size:13.5px;color:#0c4a6e;line-height:1.6">${p}</div></div>`; });
+    html += `</div>`;
+  }
+  if (ej.commonMistakes) {
+    html += `<div class="warning-box"><h5>⚠️ Errores comunes</h5>`;
+    ej.commonMistakes.forEach(err => { html += `<p>❌ ${err}</p>`; });
+    html += `</div>`;
+  }
+  if (ej.relatedConcept) html += `<div class="definition-box"><h5>🔗 Conceptos relacionados</h5><p>${ej.relatedConcept}</p></div>`;
+  if (ej.hint) html += `<div class="tip-box"><h5>💡 Pista adicional</h5><p>${ej.hint}</p></div>`;
+  html += `<div style="text-align:center;padding-top:10px"><button class="btn btn-primary" onclick="cerrarAyuda()"><span>👍</span> ¡Voy a intentarlo!</button></div>`;
+  document.getElementById('ayuda-body').innerHTML = html;
+  document.getElementById('modal-ayuda').classList.add('show');
+}
+
+function cerrarAyuda() { document.getElementById('modal-ayuda').classList.remove('show'); }
+function cerrarEval() { document.getElementById('modal-eval').classList.remove('show'); }
+
+const FRASES_BUBU = [
+  '¡Tú puedes! La práctica hace al maestro 🐰',
+  'Paso a paso se llega lejos 🌟',
+  '¡La matemática es divertida, como yo! ✨',
+  'Cada error es un aprendizaje 💡',
+  '¡Piensa un poquito más, tú sabes! 🧠',
+  'No hay ejercicio imposible 🔍',
+  'Las matemáticas son el lenguaje del universo 🌌',
+  'Respira, analiza y resuelve 🎯',
+  'El álgebra es como un juego de pistas 🧩',
+  '¡Un reto más y lo logras! 💪',
+  'Los números no mienten 🔢',
+  'Con calma y orden, todo se resuelve ✨',
+  'La constancia es la clave del éxito 🗝️',
+  '¡Vamos! Solo falta un empujoncito 🚀',
+  'Los genios nacen de la práctica diaria 🌱',
+  'La geometría es el arte de razonar 🎨',
+  '¡Qué bueno verte aquí de nuevo! 👋',
+  '¡Ya casi terminas, no te rindas! 🔥'
+];
+
+function interactuarBubu() {
+  const bubu = document.getElementById('cat-container');
+  const b = document.getElementById('cat-bubble');
+  bubu.classList.remove('bounce');
+  void bubu.offsetWidth;
+  bubu.classList.add('bounce');
+  b.textContent = FRASES_BUBU[Math.floor(Math.random() * FRASES_BUBU.length)];
+  b.classList.add('show');
+  clearTimeout(bubu._t);
+  bubu._t = setTimeout(() => b.classList.remove('show'), 3200);
+}
+
+function mostrarToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(() => t.classList.add('show'));
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 400); }, 3200);
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { cerrarAyuda(); cerrarEval(); } });
+setTimeout(() => { const b = document.getElementById('cat-bubble'); b.textContent = '¡Hola! Soy Bubu. Tócame cuando quieras 🐰'; b.classList.add('show'); setTimeout(() => b.classList.remove('show'), 4500); }, 1000);
+</script>
+
+</body>
+</html>
